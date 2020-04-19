@@ -1,0 +1,51 @@
+.app-header {
+    background-color: #263238;
+    height: 45px;
+    padding: 8px 32px 8px 16px;
+    display: flex;
+    align-items: center;
+
+
+}
+
+.app-title {
+    color: white;
+    font-size: medium;
+
+    display: inline-block;
+
+
+}
+
+.avatar {
+
+    display: inline-block;
+    align-items: end;
+    margin-right: 0;
+    margin-left: 0;
+
+}
+
+.searchContainer {
+    display: flex;
+    margin-right: 20px;
+    margin-left: auto;
+    border-radius: 5px;
+    background: #A8ADAF;
+    padding: 5px;
+    min-width:30%;
+
+}
+.searchinput{
+    background: #A8ADAF;
+    padding: 0px;
+    border: #A8ADAF;
+    margin-left: 5px;
+    margin-right: fill;
+    width: 100%;
+
+
+
+
+
+}
