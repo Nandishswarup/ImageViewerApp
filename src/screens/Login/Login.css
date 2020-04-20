@@ -1,0 +1,18 @@
+.containercard{
+    display: table;
+    margin: 0 auto;
+    padding: 50px;
+    margin-top: 10px;
+
+    width: 25%;
+}
+.dispNone{
+    display: none;
+}
+
+.dispBlock{
+    display: block;
+}
+.red{
+    color: red;
+}

@@ -10,11 +10,8 @@
 
 .app-title {
     color: white;
-    font-size: medium;
-
+    font-size: 18px;
     display: inline-block;
-
-
 }
 
 .avatar {
@@ -33,10 +30,11 @@
     border-radius: 5px;
     background: #A8ADAF;
     padding: 5px;
-    min-width:30%;
+    min-width: 30%;
 
 }
-.searchinput{
+
+.searchinput {
     background: #A8ADAF;
     padding: 0px;
     border: #A8ADAF;
@@ -45,7 +43,7 @@
     width: 100%;
 
 
-
-
-
+}
+.loginHeading{
+    font-size: 18px;
 }

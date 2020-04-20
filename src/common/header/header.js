@@ -1,13 +1,17 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react'
 import './header.css';
-import {Avatar} from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
+import {Avatar} from '@material-ui/core';
 
 class Header extends Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
         return (
 
             <div>
+                <div>{this.props.defaultAccessToken} nan</div>
 
                 <header className="app-header">
 
@@ -16,7 +20,10 @@ class Header extends Component {
                      </span>
 
                     <div className="searchContainer">
+
+
                         <SearchIcon/>
+
                         <input className="searchinput" placeholder="Search"/>
                     </div>
                     <div className="avatar">
