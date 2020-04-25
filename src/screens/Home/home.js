@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import Header from "../../common/header/header";
-import {Card} from '@material-ui/core';
+import {Card, colors} from '@material-ui/core';
 import "./home.css"
 import {Grid} from '@material-ui/core';
 
@@ -15,7 +15,8 @@ import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-
+import ReactHashtag from "react-hashtag";
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 const useStyles = makeStyles((theme) => ({
     root: {
         maxWidth: 345,
@@ -52,6 +53,7 @@ class Home extends Component {
                     low_resolution: {},
                     standard_resolution: {}
                 },
+                tags:[],
                 caption: {
                     from: {}
                     },
@@ -65,6 +67,7 @@ class Home extends Component {
             profile_picture: ""
         }
     }
+
 
 
     componentWillMount() {
@@ -87,28 +90,7 @@ class Home extends Component {
     }
 
 
-    handlerMakeList = () => {
 
-        var keys = Object.keys(this.state.posts);
-
-        for (var i = 0; i < this.state.posts.length; i++) {
-            var key = (keys[i]);
-            //console.log(this.state.posts[key].images.standard_resolution.url);
-
-            /*  console.log(this.state.posts[key]);
-              console.log(this.state.posts[key].images.standard_resolution.url);
-  */            //this.setState({profile_picture: this.state.posts[key].user.profile_picture})
-
-            /*  return (
-                  <img src={this.state.posts[key].images.standard_resolution.url}></img>
-
-              );*/
-
-
-        }
-
-
-    }
 
 
     formatDate=(created_time)=>{
@@ -123,6 +105,55 @@ class Home extends Component {
         var original_date=tomonth+'/'+todate+'/'+toyear + " "+hours+":"+mins+":"+seconds;
        return original_date;
 
+
+    }
+
+    renderHashtags=(stringarray)=>{
+        var str="";
+
+        stringarray.map((item,key)=>
+            str+="#"+item+" "
+        );
+
+
+        return str;
+    }
+    displayfavIcon=(user_has_liked)=>
+    {
+        if(user_has_liked)
+            return <FavoriteIcon className="redcolor"></FavoriteIcon>
+        else
+            return <FavoriteBorderIcon></FavoriteBorderIcon>
+
+    }
+
+    likeClickHandler=(postindex)=>
+    {
+       // var indexof=post.indexOf(this.posts)
+        var keys = Object.keys(this.state.posts);
+
+        for (var i = 0; i < this.state.posts.length; i++) {
+            var key = (keys[i]);
+            if(postindex.id==this.state.posts[key].id)
+            {
+                var count=this.state.posts[key].likes.count;
+                if(this.state.posts[key].user_has_liked)
+                {
+                    this.state.posts[key].likes.count=count-1;
+                    this.state.posts[key].user_has_liked=false;
+                }
+                else {
+                    this.state.posts[key].likes.count=count+1;
+                    this.state.posts[key].user_has_liked=true;
+                }
+
+
+
+                this.setState({posts:this.state.posts})
+            }
+
+
+        }
 
     }
 
@@ -206,17 +237,19 @@ class Home extends Component {
 
 
                                     <div>
-                                        {post.caption.text}
-                                    </div>
+                                        {
+                                            post.caption.text
+                                        }
+                                 </div>
                                     <div className="hashtags">
-                                        #tags
+                                        {this.renderHashtags(post.tags)}
                                     </div>
                                 </CardContent>
                                 <CardActions style={{paddingTop: 0}}>
-                                    <IconButton aria-label="add to favorites">
-                                        <FavoriteIcon/>
+                                    <IconButton aria-label="add to favorites" onClick={this.likeClickHandler.bind(this,post)}>
+                                        {this.displayfavIcon(post.user_has_liked)}
                                     </IconButton>
-                                    3 likes
+                                    {post.likes.count} likes
                                 </CardActions>
                                 <div className="add-comment">
                                     <TextField className="add-comment-input" id="standard-basic" label="Add a comment"/>

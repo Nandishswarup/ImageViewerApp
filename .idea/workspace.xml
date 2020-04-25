@@ -3,11 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="dc444679-185b-4ec5-8d4b-4a5bf3e6dd1a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/header/header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/header/header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/Home/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Home/home.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/Home/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Home/home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/Login/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Login/Login.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +82,7 @@
       <updated>1587258947755</updated>
       <workItem from="1587258949941" duration="16859000" />
       <workItem from="1587681278941" duration="8804000" />
-      <workItem from="1587711284863" duration="19267000" />
+      <workItem from="1587711284863" duration="24133000" />
     </task>
     <servers />
   </component>
@@ -95,10 +94,10 @@
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="453" y="123" key="#com.intellij.ide.util.MemberChooser/0.0.1280.800@0.0.1280.800" timestamp="1587707457086" />
-    <state x="219" y="2" key="CommitChangelistDialog2" timestamp="1587797093278">
+    <state x="219" y="2" key="CommitChangelistDialog2" timestamp="1587856147799">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state x="219" y="2" key="CommitChangelistDialog2/0.0.1280.800@0.0.1280.800" timestamp="1587797093278" />
+    <state x="219" y="2" key="CommitChangelistDialog2/0.0.1280.800@0.0.1280.800" timestamp="1587856147799" />
     <state width="1280" height="272" key="GridCell.Tab.0.bottom" timestamp="1587710544847">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
@@ -189,7 +188,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/screens/Home/home.js</url>
-          <line>70</line>
+          <line>73</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
