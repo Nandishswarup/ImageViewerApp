@@ -1,0 +1,57 @@
+.inline_align {
+    display: inline-block;
+    display: inline-flex;
+}
+
+.card-layout {
+    width: 45%;
+    margin: 10px;
+}
+
+.grid-layout {
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 10px;
+}
+
+.rule {
+    background: grey;
+    height: 2px;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+}
+
+.hr-line {
+    margin-left: 20px;
+    border-color: #e2e2e2;
+}
+
+.hashtags {
+    color: lightskyblue;
+}
+
+.action-button {
+    padding-top: -10px;
+}
+
+.add-comment {
+    display: block;
+    padding: 20px;
+
+}
+
+.add-comment-input {
+    width: 80%;
+    margin: 25px;
+}
+add-comment-button{
+    margin-top: 16px;
+}
+.image-content{
+    width: 100%;
+    height: 100%;
+}

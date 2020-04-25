@@ -11,7 +11,9 @@ class Header extends Component {
         return (
 
             <div>
+{/*
                 <div>{this.props.defaultAccessToken} nan</div>
+*/}
 
                 <header className="app-header">
 
@@ -28,7 +30,6 @@ class Header extends Component {
                     </div>
                     <div className="avatar">
                         <Avatar alt="P" src="https://upload.wikimedia.org/wikipedia/en/e/e7/5-cube_solved_close.png"/>
-
                     </div>
 
 

@@ -8,14 +8,19 @@ class Controller extends Component {
     constructor()
     {
         super();
-        this.baseUrl = "";
+        this.baseUrl = "https://api.instagram.com/v1/users/self/";
     }
+
+
     render(){
         return(
             <Router>
                 <div>
                     <Route exact path='/' component={Login}  />
-                    <Route exact path='/home' component={Home} />
+                    {/*<Route exact path='/home' component={Home} />*/}
+                    <Route exact path='/home'  render={(props)=> <Home{...props} baseUrl={this.baseUrl}/> }/>
+
+
                 </div>
             </Router>
 
