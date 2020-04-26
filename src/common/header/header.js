@@ -2,6 +2,21 @@ import React, { Component } from 'react'
 import './header.css';
 import SearchIcon from '@material-ui/icons/Search';
 import {Avatar} from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from "@material-ui/core/styles";
+
+
+const useStyles = makeStyles({
+    underline: {
+        "&&&:before": {
+            borderBottom: "none"
+        },
+        "&&:after": {
+            borderBottom: "none"
+        }
+    }
+});
+
 
 class Header extends Component {
     constructor(props) {
@@ -11,10 +26,6 @@ class Header extends Component {
         return (
 
             <div>
-{/*
-                <div>{this.props.defaultAccessToken} nan</div>
-*/}
-
                 <header className="app-header">
 
                      <span className="app-title">
@@ -22,13 +33,12 @@ class Header extends Component {
                      </span>
 
                     <div className="searchContainer">
-
-
                         <SearchIcon/>
 
-                        <input className="searchinput" placeholder="Search"/>
+                        <TextField className="searchinput" placeholder="Search" onChange={this.props.onChanged} InputProps={{ disableUnderline: true }}
+                        />
                     </div>
-                    <div className="avatar">
+                    <div className="avatar" onClick={this.props.onClicked}>
                         <Avatar alt="P" src="https://upload.wikimedia.org/wikipedia/en/e/e7/5-cube_solved_close.png"/>
                     </div>
 

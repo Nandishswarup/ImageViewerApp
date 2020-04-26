@@ -31,6 +31,7 @@
     background: #A8ADAF;
     padding: 5px;
     min-width: 30%;
+    align-items: center;
 
 }
 
@@ -38,9 +39,11 @@
     background: #A8ADAF;
     padding: 0px;
     border: #A8ADAF;
-    margin-left: 5px;
+    margin-left: 10px;
     margin-right: fill;
     width: 100%;
+    display: flex;
+    align-self: center;
 
 
 }

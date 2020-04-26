@@ -17,6 +17,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import ReactHashtag from "react-hashtag";
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+
 const useStyles = makeStyles((theme) => ({
     root: {
         maxWidth: 345,
@@ -41,10 +42,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
 class Home extends Component {
     constructor(props) {
         super(props);
+        this.onChildClicked = this.onChildClicked.bind(this);
+        this.onSearchChangeListener = this.onSearchChangeListener.bind(this);
+
         this.state = {
             posts: [{
                 user: {},
@@ -53,103 +56,217 @@ class Home extends Component {
                     low_resolution: {},
                     standard_resolution: {}
                 },
-                tags:[],
+                tags: [],
                 caption: {
                     from: {}
-                    },
-                likes:{},
-                comments:{},
-                location:{},
-
+                },
+                likes: {},
+                comments: {},
+                location: {},
+                commentsectionpost: [],
 
 
             }],
-            profile_picture: ""
+            backupposts: [{
+                user: {},
+                images: {
+                    thumbnail: {},
+                    low_resolution: {},
+                    standard_resolution: {}
+                },
+                tags: [],
+                caption: {
+                    from: {}
+                },
+                likes: {},
+                comments: {},
+                location: {},
+                commentsectionpost: [],
+
+
+            }],
+            profile_picture: "",
+            addCommentField: "",
+            commentsection: [{
+
+            }],
+
         }
+    }
+    onChildClicked() {
+        console.log("clcked")
+    }
+    onSearchChangeListener = event =>
+    {
+        this.state.posts=[]
+
+
+        var enteredvalue=event.target.value;
+        var keys = Object.keys(this.state.backupposts);
+
+        for (var i = 0; i < this.state.backupposts.length; i++) {
+            var key = (keys[i]);
+             console.log(enteredvalue)
+
+            if (this.state.backupposts[key].caption.text.toLowerCase().includes(enteredvalue.toLowerCase())) {
+                console.log(this.state.backupposts[key])
+
+                this.state.posts.push(this.state.backupposts[key])
+
+            }
+        }
+        this.setState({posts: this.state.posts})
+
     }
 
 
-
     componentWillMount() {
-        let dataUpcoming = null;
-        let xhrUpcoming = new XMLHttpRequest();
+        let list = null;
+        let xhr  = new XMLHttpRequest();
         let that = this;
-        xhrUpcoming.addEventListener("readystatechange", function () {
+        xhr.addEventListener("readystatechange", function () {
             if (this.readyState === 4) {
-                 that.setState({posts: JSON.parse(this.responseText).data});
+                that.setState({posts: JSON.parse(this.responseText).data});
+                that.setState({backupposts: JSON.parse(this.responseText).data});
+
 
             }
         })
 
         let url = this.props.baseUrl + "media/recent?access_token=" + this.props.location.state.defaultAccessToken
         console.log("url" + url);
-        xhrUpcoming.open("GET", this.props.baseUrl + "media/recent?access_token=" + this.props.location.state.defaultAccessToken);
-        xhrUpcoming.send(dataUpcoming);
+        xhr.open("GET", this.props.baseUrl + "media/recent?access_token=" + this.props.location.state.defaultAccessToken);
+        xhr.send(list);
 
 
     }
 
+    commentOnChangeHandler = event => {
+        this.setState({addCommentField: event.target.value});
+    }
+
+    searchOnchangeHandler = event => {
 
 
 
+    }
+    avatarClick=()=>
+    {
+        console.log("avatarClick")
 
-    formatDate=(created_time)=>{
-        console.log(created_time)
-        var timestamp=new Date(created_time* 1000).getTime();
-        var todate=new Date(timestamp).getDate();
-        var tomonth=new Date(timestamp).getMonth()+1;
-        var toyear=new Date(timestamp).getFullYear();
-        var hours=new Date(timestamp).getHours();
-        var mins=new Date(timestamp).getMinutes();
-        var seconds=new Date(timestamp).getSeconds();
-        var original_date=tomonth+'/'+todate+'/'+toyear + " "+hours+":"+mins+":"+seconds;
-       return original_date;
+    }
+
+    formatDate = (created_time) => {
+        var timestamp = new Date(created_time * 1000).getTime();
+        var todate = new Date(timestamp).getDate();
+        var tomonth = new Date(timestamp).getMonth() + 1;
+        var toyear = new Date(timestamp).getFullYear();
+        var hours = new Date(timestamp).getHours();
+        var mins = new Date(timestamp).getMinutes();
+        var seconds = new Date(timestamp).getSeconds();
+        var original_date = tomonth + '/' + todate + '/' + toyear + " " + hours + ":" + mins + ":" + seconds;
+        return original_date;
 
 
     }
 
-    renderHashtags=(stringarray)=>{
-        var str="";
+    renderHashtags = (stringarray) => {
+        var str = "";
 
-        stringarray.map((item,key)=>
-            str+="#"+item+" "
+        stringarray.map((item, key) =>
+            str += "#" + item + " "
         );
 
 
         return str;
     }
-    displayfavIcon=(user_has_liked)=>
-    {
-        if(user_has_liked)
+
+
+   /* renderComment =(commentsectionpost) => {
+
+
+        if (this.state.posts.commentsectionpost === undefined) {
+            console.log("renderComment undefined")
+
+        } else {
+            console.log("renderComment non undefined")
+
+            this.state.posts.commentsectionpost.map(comment => (
+
+                this.returnDiv(comment)
+
+            ))
+
+        }
+
+
+    }
+*/
+    returnDiv(comment) {
+        if(comment!=undefined)
+        return (
+
+            <ul>
+                {comment.map((item, index) => (
+                    <li>{item}</li>
+                ))}
+
+            </ul>
+        );
+
+    }
+
+
+    displayFavIcon = (user_has_liked) => {
+        if (user_has_liked)
             return <FavoriteIcon className="redcolor"></FavoriteIcon>
         else
             return <FavoriteBorderIcon></FavoriteBorderIcon>
 
     }
 
-    likeClickHandler=(postindex)=>
-    {
-       // var indexof=post.indexOf(this.posts)
+    addCommentHandler = (post, comment) => {
+
+        console.log(comment);
+
         var keys = Object.keys(this.state.posts);
 
         for (var i = 0; i < this.state.posts.length; i++) {
             var key = (keys[i]);
-            if(postindex.id==this.state.posts[key].id)
-            {
-                var count=this.state.posts[key].likes.count;
-                if(this.state.posts[key].user_has_liked)
-                {
-                    this.state.posts[key].likes.count=count-1;
-                    this.state.posts[key].user_has_liked=false;
+            if (post.id == this.state.posts[key].id) {
+                this.state.commentsection.push(this.state.posts[key].commentsectionpost)
+                this.state.posts[key].commentsectionpost.push(comment);
+                //this.state.posts[key].commentsectionpost = this.state.commentsection;
+                console.log(this.state.posts[key].commentsectionpost)
+                this.setState({commentsection:[]})
+
+            }
+
+
+        }
+        this.setState({posts: this.state.posts})
+        console.log(this.state.posts)
+
+
+    }
+
+    likeClickHandler = (post) => {
+        var keys = Object.keys(this.state.posts);
+
+        for (var i = 0; i < this.state.posts.length; i++) {
+            var key = (keys[i]);
+            if (post.id == this.state.posts[key].id) {
+                var count = this.state.posts[key].likes.count;
+                if (this.state.posts[key].user_has_liked) {
+                    this.state.posts[key].likes.count = count - 1;
+                    this.state.posts[key].user_has_liked = false;
+                } else {
+                    this.state.posts[key].likes.count = count + 1;
+                    this.state.posts[key].user_has_liked = true;
                 }
-                else {
-                    this.state.posts[key].likes.count=count+1;
-                    this.state.posts[key].user_has_liked=true;
-                }
 
 
-
-                this.setState({posts:this.state.posts})
+                this.setState({posts: this.state.posts})
             }
 
 
@@ -164,7 +281,7 @@ class Home extends Component {
 
         return (
             <div>
-                <Header defaultAccessToken={this.props.location.state.defaultAccessToken}/>
+                <Header defaultAccessToken={this.props.location.state.defaultAccessToken} onChanged={this.onSearchChangeListener} onClicked={this.onChildClicked}  />
 
                 <div className="grid-layout">
                     <Grid
@@ -230,8 +347,8 @@ class Home extends Component {
 
                                     <img className="image-content"
 
-                                        src={post.images.standard_resolution.url}
-                                        alt="img"
+                                         src={post.images.standard_resolution.url}
+                                         alt="img"
                                     />
                                     <hr className="hr-line"></hr>
 
@@ -240,22 +357,30 @@ class Home extends Component {
                                         {
                                             post.caption.text
                                         }
-                                 </div>
+                                    </div>
                                     <div className="hashtags">
                                         {this.renderHashtags(post.tags)}
                                     </div>
                                 </CardContent>
                                 <CardActions style={{paddingTop: 0}}>
-                                    <IconButton aria-label="add to favorites" onClick={this.likeClickHandler.bind(this,post)}>
-                                        {this.displayfavIcon(post.user_has_liked)}
+                                    <IconButton aria-label="add to favorites"
+                                                onClick={this.likeClickHandler.bind(this, post)}>
+                                        {this.displayFavIcon(post.user_has_liked)}
                                     </IconButton>
                                     {post.likes.count} likes
                                 </CardActions>
-                                <div className="add-comment">
-                                    <TextField className="add-comment-input" id="standard-basic" label="Add a comment"/>
+                                    {this.returnDiv(post.commentsectionpost)}
 
-                                    <Button variant="contained" color="primary" style={{marginTop: 10, marginLeft: 10}}>
-                                        Add
+                              {/*  <ul>
+                                   <li>{post.commentsectionpost}</li>
+                                </ul>*/}
+                                <div className="add-comment">
+                                    <TextField className="add-comment-input" id="standard-basic" label="Add a comment"
+                                               onChange={this.commentOnChangeHandler}/>
+
+                                    <Button variant="contained" color="primary" style={{marginTop: 10, marginLeft: 10}}
+                                            onClick={this.addCommentHandler.bind(this, post, this.state.addCommentField)}>
+                                        ADD
                                     </Button>
                                 </div>
 

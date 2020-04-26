@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="dc444679-185b-4ec5-8d4b-4a5bf3e6dd1a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/Home/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Home/home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/header/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/header/header.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/header/header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/header/header.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/Home/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Home/home.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -82,7 +81,7 @@
       <updated>1587258947755</updated>
       <workItem from="1587258949941" duration="16859000" />
       <workItem from="1587681278941" duration="8804000" />
-      <workItem from="1587711284863" duration="24133000" />
+      <workItem from="1587711284863" duration="37600000" />
     </task>
     <servers />
   </component>
@@ -188,7 +187,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/screens/Home/home.js</url>
-          <line>73</line>
+          <line>123</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
