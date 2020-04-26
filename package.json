@@ -5,7 +5,10 @@
   "dependencies": {
     "@material-ui/core": "^4.9.11",
     "@material-ui/icons": "^4.9.1",
+    "bootstrap": "^4.4.1",
+    "material-ui-popup-state": "^1.5.4",
     "react": "^16.13.1",
+    "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
     "react-hashtag": "^2.1.2",
     "react-native": "^0.62.2",

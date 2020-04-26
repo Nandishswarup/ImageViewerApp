@@ -15,37 +15,13 @@ import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import ReactHashtag from "react-hashtag";
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        maxWidth: 345,
-    },
-    media: {
-        height: 0,
-        paddingTop: '56.25%', // 16:9
-    },
-    expand: {
-        transform: 'rotate(0deg)',
-        marginLeft: 'auto',
-        transition: theme.transitions.create('transform', {
-            duration: theme.transitions.duration.shortest,
-        }),
-    },
-    expandOpen: {
-        transform: 'rotate(180deg)',
-    },
-    avatar: {
-        backgroundColor: red[500],
-    },
-}));
-
+ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 class Home extends Component {
     constructor(props) {
         super(props);
-        this.onChildClicked = this.onChildClicked.bind(this);
+        this.onLogoutHandler=this.onLogoutHandler.bind(this)
+        this.openMyProfile = this.openMyProfile.bind(this);
         this.onSearchChangeListener = this.onSearchChangeListener.bind(this);
 
         this.state = {
@@ -90,11 +66,21 @@ class Home extends Component {
             commentsection: [{
 
             }],
+            isUserLoggedIn:"true",
 
         }
     }
-    onChildClicked() {
+    openMyProfile=()=> {
         console.log("clcked")
+
+        this.props.history.push({
+            pathname:"/profile",
+            state:{
+                accessToken:this.state.accessToken,
+                defaultAccessToken:this.state.defaultAccessToken
+
+            }
+        })
     }
     onSearchChangeListener = event =>
     {
@@ -118,9 +104,12 @@ class Home extends Component {
         this.setState({posts: this.state.posts})
 
     }
-
+    componentDidMount() {
+        console.log(this.props.title)
+    }
 
     componentWillMount() {
+        this.setState({isUserLoggedIn:"true"})
         let list = null;
         let xhr  = new XMLHttpRequest();
         let that = this;
@@ -133,6 +122,18 @@ class Home extends Component {
             }
         })
 
+        if(this.props.location.state==undefined)
+        {
+            this.props.history.push({
+                pathname:"/",
+                state:{
+                    accessToken:this.state.accessToken,
+                    defaultAccessToken:this.state.defaultAccessToken
+
+                }
+            })
+            return
+        }
         let url = this.props.baseUrl + "media/recent?access_token=" + this.props.location.state.defaultAccessToken
         console.log("url" + url);
         xhr.open("GET", this.props.baseUrl + "media/recent?access_token=" + this.props.location.state.defaultAccessToken);
@@ -145,11 +146,11 @@ class Home extends Component {
         this.setState({addCommentField: event.target.value});
     }
 
-    searchOnchangeHandler = event => {
-
-
-
+    onLogoutHandler=()=>
+    {
+        console.log("onLogoutHandler")
     }
+
     avatarClick=()=>
     {
         console.log("avatarClick")
@@ -181,27 +182,6 @@ class Home extends Component {
         return str;
     }
 
-
-   /* renderComment =(commentsectionpost) => {
-
-
-        if (this.state.posts.commentsectionpost === undefined) {
-            console.log("renderComment undefined")
-
-        } else {
-            console.log("renderComment non undefined")
-
-            this.state.posts.commentsectionpost.map(comment => (
-
-                this.returnDiv(comment)
-
-            ))
-
-        }
-
-
-    }
-*/
     returnDiv(comment) {
         if(comment!=undefined)
         return (
@@ -215,7 +195,6 @@ class Home extends Component {
         );
 
     }
-
 
     displayFavIcon = (user_has_liked) => {
         if (user_has_liked)
@@ -281,7 +260,7 @@ class Home extends Component {
 
         return (
             <div>
-                <Header defaultAccessToken={this.props.location.state.defaultAccessToken} onChanged={this.onSearchChangeListener} onClicked={this.onChildClicked}  />
+                <Header isUserLoggedIn={this.state.isUserLoggedIn} defaultAccessToken={this.props.location.state.defaultAccessToken} onChanged={this.onSearchChangeListener} onMyProfileClickHandler={this.openMyProfile} onLogoutClickHandler={this.onLogoutHandler}  />
 
                 <div className="grid-layout">
                     <Grid
@@ -289,46 +268,6 @@ class Home extends Component {
                         direction="row"
                         justify="center"
                         alignItems="flex-start">
-                        {/*  <Card className="card-layout">
-                            <CardHeader
-                                avatar={
-                                    <Avatar aria-label="recipe" src={this.state.profile_picture}>
-                                    </Avatar>
-                                }
-                                title="Shrimp and Chorizo Paella"
-                                subheader="September 14, 2016"
-                            />
-                            <CardContent style={{paddingBottom: 0}}>
-
-                                <img
-                                    src="https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350"
-                                    alt="img"
-                                />
-                                <hr className="hr-line"></hr>
-
-                                <Typography variant="body2" color="black" component="p">
-                                    Team of great people at upgrad
-                                </Typography>
-                                <div className="hashtags">
-                                    #tags
-                                </div>
-                            </CardContent>
-                            <CardActions style={{paddingTop: 0}}>
-                                <IconButton aria-label="add to favorites">
-                                    <FavoriteIcon/>
-                                </IconButton>
-                                3 likes
-                            </CardActions>
-                            <div className="add-comment">
-                                <TextField className="add-comment-input" id="standard-basic" label="Add a comment"/>
-
-                                <Button variant="contained" color="primary" style={{marginTop:10,marginLeft: 10}}>
-                                    Add
-                                </Button>
-                            </div>
-
-
-                        </Card>*/}
 
 
                         {this.state.posts.map(post => (
@@ -369,9 +308,9 @@ class Home extends Component {
                                     </IconButton>
                                     {post.likes.count} likes
                                 </CardActions>
-                                    {this.returnDiv(post.commentsectionpost)}
+                                {this.returnDiv(post.commentsectionpost)}
 
-                              {/*  <ul>
+                                {/*  <ul>
                                    <li>{post.commentsectionpost}</li>
                                 </ul>*/}
                                 <div className="add-comment">

@@ -34,6 +34,12 @@
     align-items: center;
 
 }
+.container-search-avatar{
+
+    display: flex;
+    align-items: end;
+    margin-right: 0;
+    margin-left: auto;}
 
 .searchinput {
     background: #A8ADAF;
@@ -49,4 +55,7 @@
 }
 .loginHeading{
     font-size: 18px;
+}
+.dispNone{
+    display:none;
 }
