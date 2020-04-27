@@ -31,8 +31,8 @@ class Header extends Component {
     }
 
 
-    returnDiv(value) {
-        if(value==="true")
+    returnDiv(value,profileImage) {
+        if (value === "true")
             return (
 
                 <div className="container-search-avatar">
@@ -49,10 +49,31 @@ class Header extends Component {
                             <React.Fragment>
                                 <div className="avatar"  {...bindTrigger(popupState)}>
                                     <Avatar alt="P"
-                                            src="https://upload.wikimedia.org/wikipedia/en/e/e7/5-cube_solved_close.png"/>
+                                            src={profileImage}/>
+                                </div>
+                                <Menu {...bindMenu(popupState)} style={{marginTop:45}}>
+                                    <MenuItem onClick={this.props.onMyProfileClickHandler}>My Profile</MenuItem>
+                                    <MenuItem onClick={this.props.onLogoutClickHandler}>Logout</MenuItem>
+                                </Menu>
+                            </React.Fragment>
+                        )}
+                    </PopupState>
+
+                </div>
+            );
+        if (value == "profile")
+            return (
+
+                <div className="container-search-avatar">
+
+                    <PopupState variant="popover" popupId="demo-popup-menu">
+                        {(popupState) => (
+                            <React.Fragment>
+                                <div className="avatar"  {...bindTrigger(popupState)}>
+                                    <Avatar alt="P"
+                                            src={profileImage}/>
                                 </div>
                                 <Menu {...bindMenu(popupState)}>
-                                    <MenuItem onClick={this.props.onMyProfileClickHandler}>My Profile</MenuItem>
                                     <MenuItem onClick={this.props.onLogoutClickHandler}>Logout</MenuItem>
                                 </Menu>
                             </React.Fragment>
@@ -74,9 +95,9 @@ class Header extends Component {
                 <header className="app-header">
 
                      <span className="app-title">
-                         Image Viewer {this.props.value}
+                         Image Viewer
                      </span>
-                    {this.returnDiv(this.props.isUserLoggedIn)}
+                    {this.returnDiv(this.props.isUserLoggedIn,this.props.profilePicture)}
 
                 </header>
             </div>

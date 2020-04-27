@@ -20,7 +20,6 @@ class Login extends Component {
                 usernameRequired: "dispNone",
                 passwordRequired: "dispNone",
                 defaultAccessToken: "8661035776.d0fcd39.39f63ab2f88d4f9c92b0862729ee2784",
-                accessToken:"",
                 isUserLoggedIn:"dispNone",
 
 
@@ -78,11 +77,9 @@ class Login extends Component {
 
 
         }
-        this.state.accessToken=this.state.defaultAccessToken
         this.props.history.push({
             pathname:"/home",
             state:{
-                accessToken:this.state.accessToken,
                 defaultAccessToken:this.state.defaultAccessToken
 
             }

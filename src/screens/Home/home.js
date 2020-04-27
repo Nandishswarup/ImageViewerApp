@@ -15,12 +15,12 @@ import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
- import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 class Home extends Component {
     constructor(props) {
         super(props);
-        this.onLogoutHandler=this.onLogoutHandler.bind(this)
+        this.onLogoutHandler = this.onLogoutHandler.bind(this)
         this.openMyProfile = this.openMyProfile.bind(this);
         this.onSearchChangeListener = this.onSearchChangeListener.bind(this);
 
@@ -63,36 +63,35 @@ class Home extends Component {
             }],
             profile_picture: "",
             addCommentField: "",
-            commentsection: [{
-
-            }],
-            isUserLoggedIn:"true",
+            commentsection: [{}],
+            isUserLoggedIn: "true",
+            defaultAccessToken:"",
 
         }
     }
-    openMyProfile=()=> {
-        console.log("clcked")
+
+    openMyProfile = () => {
+
+        console.log(this.state.defaultAccessToken)
 
         this.props.history.push({
-            pathname:"/profile",
-            state:{
-                accessToken:this.state.accessToken,
-                defaultAccessToken:this.state.defaultAccessToken
+            pathname: "/profile",
+            state: {
+                defaultAccessToken: this.state.defaultAccessToken
 
             }
         })
     }
-    onSearchChangeListener = event =>
-    {
-        this.state.posts=[]
+    onSearchChangeListener = event => {
+        this.state.posts = []
 
 
-        var enteredvalue=event.target.value;
+        var enteredvalue = event.target.value;
         var keys = Object.keys(this.state.backupposts);
 
         for (var i = 0; i < this.state.backupposts.length; i++) {
             var key = (keys[i]);
-             console.log(enteredvalue)
+            console.log(enteredvalue)
 
             if (this.state.backupposts[key].caption.text.toLowerCase().includes(enteredvalue.toLowerCase())) {
                 console.log(this.state.backupposts[key])
@@ -104,31 +103,30 @@ class Home extends Component {
         this.setState({posts: this.state.posts})
 
     }
+
     componentDidMount() {
         console.log(this.props.title)
     }
 
     componentWillMount() {
-        this.setState({isUserLoggedIn:"true"})
+        this.state.defaultAccessToken=this.props.location.state.defaultAccessToken
+        this.setState({isUserLoggedIn: "true"})
         let list = null;
-        let xhr  = new XMLHttpRequest();
+        let xhr = new XMLHttpRequest();
         let that = this;
         xhr.addEventListener("readystatechange", function () {
             if (this.readyState === 4) {
                 that.setState({posts: JSON.parse(this.responseText).data});
                 that.setState({backupposts: JSON.parse(this.responseText).data});
 
-
             }
         })
 
-        if(this.props.location.state==undefined)
-        {
+        if (this.props.location.state == undefined) {
             this.props.history.push({
-                pathname:"/",
-                state:{
-                    accessToken:this.state.accessToken,
-                    defaultAccessToken:this.state.defaultAccessToken
+                pathname: "/",
+                state: {
+                    defaultAccessToken: this.state.defaultAccessToken
 
                 }
             })
@@ -146,13 +144,11 @@ class Home extends Component {
         this.setState({addCommentField: event.target.value});
     }
 
-    onLogoutHandler=()=>
-    {
+    onLogoutHandler = () => {
         console.log("onLogoutHandler")
     }
 
-    avatarClick=()=>
-    {
+    avatarClick = () => {
         console.log("avatarClick")
 
     }
@@ -183,16 +179,16 @@ class Home extends Component {
     }
 
     returnDiv(comment) {
-        if(comment!=undefined)
-        return (
+        if (comment != undefined)
+            return (
 
-            <ul>
-                {comment.map((item, index) => (
-                    <li>{item}</li>
-                ))}
+                <ul>
+                    {comment.map((item, index) => (
+                        <li>{item}</li>
+                    ))}
 
-            </ul>
-        );
+                </ul>
+            );
 
     }
 
@@ -217,7 +213,7 @@ class Home extends Component {
                 this.state.posts[key].commentsectionpost.push(comment);
                 //this.state.posts[key].commentsectionpost = this.state.commentsection;
                 console.log(this.state.posts[key].commentsectionpost)
-                this.setState({commentsection:[]})
+                this.setState({commentsection: []})
 
             }
 
@@ -253,6 +249,12 @@ class Home extends Component {
 
     }
 
+    updateProfilePicture = (post) => {
+        {
+            this.state.profile_picture = post.user.profile_picture
+        }
+
+    }
 
     render() {
         const {classes} = this.props;
@@ -260,7 +262,10 @@ class Home extends Component {
 
         return (
             <div>
-                <Header isUserLoggedIn={this.state.isUserLoggedIn} defaultAccessToken={this.props.location.state.defaultAccessToken} onChanged={this.onSearchChangeListener} onMyProfileClickHandler={this.openMyProfile} onLogoutClickHandler={this.onLogoutHandler}  />
+                <Header profilePicture={this.state.profile_picture} isUserLoggedIn={this.state.isUserLoggedIn}
+                        defaultAccessToken={this.props.location.state.defaultAccessToken}
+                        onChanged={this.onSearchChangeListener} onMyProfileClickHandler={this.openMyProfile}
+                        onLogoutClickHandler={this.onLogoutHandler}/>
 
                 <div className="grid-layout">
                     <Grid
@@ -274,6 +279,7 @@ class Home extends Component {
 
 
                             <Card className="card-layout">
+
                                 <CardHeader
                                     avatar={
                                         <Avatar aria-label="recipe" src={post.user.profile_picture}>
@@ -310,6 +316,8 @@ class Home extends Component {
                                 </CardActions>
                                 {this.returnDiv(post.commentsectionpost)}
 
+                                {this.updateProfilePicture(post)
+                                }
                                 {/*  <ul>
                                    <li>{post.commentsectionpost}</li>
                                 </ul>*/}

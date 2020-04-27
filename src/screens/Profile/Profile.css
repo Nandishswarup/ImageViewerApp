@@ -1,0 +1,74 @@
+.user-image{
+
+    display: block;
+    margin-left: 40px;
+    margin-top: 20px;
+}
+.profile-info{
+    flex-direction: column;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-around;
+    align-items: initial;
+    flex: 3;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+.top-container{
+
+
+
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-around;
+    align-items: inherit;
+    flex: 1;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+.profile-counts{
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+}
+.flexitem{
+    flex-direction: row;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.username{
+    font-size: 27px;
+    font-family: Roboto;
+}
+.parentcontainer{
+
+}
+.fullname{
+    font-size: 19px;
+    font-family: Roboto;
+
+}
+.fab-edit{
+    margin-left: 40px;
+}
+
+.grid-layout {
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 40px;
+}
+.image-content{
+    width: 360px;
+    height: 360px;
+    margin: 2px;
+}
