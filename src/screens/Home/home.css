@@ -41,6 +41,7 @@
 .add-comment {
     display: block;
     padding: 20px;
+    width: 100%;
 
 }
 
@@ -57,4 +58,16 @@ add-comment-button{
 }
 .redcolor{
     color: red;
+}
+.comment-username{
+    font-weight: bolder;
+    list-style-type: none;
+    margin-bottom:5px;
+    margin-left: -20px;
+}
+.comment-content{
+    font-weight: normal;
+
+    font-family: "Roboto";
+
 }

@@ -45,6 +45,7 @@ class Profile extends Component {
 
     constructor(props) {
         super(props);
+        this.onLogoutHandler=this.onLogoutHandler.bind(this);
 
         this.state = {
             imageDetailModal: false,
@@ -89,6 +90,9 @@ class Profile extends Component {
                 counts: {}
             },
             updateName: "",
+            temparray: [],
+            addCommentField:""
+
 
         }
     }
@@ -182,27 +186,25 @@ class Profile extends Component {
 
 
     handleOpenModal = () => {
-        //this.state.showModal=true;
-        this.setState({showModal: true});
+         this.setState({showModal: true});
     }
 
     handleCloseModal = () => {
-        //this.state.showModal=false;
-        this.state.profile.full_name = this.state.updateName
+         this.state.profile.full_name = this.state.updateName
 
         this.setState({showModal: false});
     }
     openImageDetailModal = (post) => {
         this.setState({selectedPost:post})
         if(post!=null) {
-            console.log("post not null")
 
             this.setState({imageDetailModal: true});
         }
 
     }
-    closeImageDetailModal = (post) => {
+    closeImageDetailModal = () => {
         this.setState({imageDetailModal: false});
+        this.setState({showModal: false});
 
 
     }
@@ -218,53 +220,76 @@ class Profile extends Component {
     }
     addCommentHandler = (post, comment) => {
 
+
         console.log(comment);
 
         var keys = Object.keys(this.state.posts);
 
         for (var i = 0; i < this.state.posts.length; i++) {
             var key = (keys[i]);
+            console.log(this.state.posts[key]);
+
             if (post.id == this.state.posts[key].id) {
-                this.state.commentsection.push(this.state.posts[key].commentsectionpost)
-                this.state.posts[key].commentsectionpost.push(comment);
-                //this.state.posts[key].commentsectionpost = this.state.commentsection;
-                console.log(this.state.posts[key].commentsectionpost)
-                this.setState({commentsection: []})
+                if(this.state.posts[key].commentsectionpost==undefined)
+                {
+                    this.state.posts[key].commentsectionpost=[]
+                    this.state.posts[key].commentsectionpost.push(comment)
+                }
+                else
+                    this.state.posts[key].commentsectionpost.push(comment)
 
             }
 
 
         }
+        this.state.addCommentField=""
         this.setState({posts: this.state.posts})
         console.log(this.state.posts)
 
 
     }
+    commentOnChangeHandler = event => {
+        this.setState({addCommentField: event.target.value});
+    }
+    returnDiv(username,comment) {
+        if (comment != undefined)
+            return (
+
+                <ul>
+                    {comment.map((item, index) => (
+                        <li className="comment-username">{username}<span className="comment-content"> : {item}</span></li>
+                    ))}
+
+                </ul>
+            );
+
+    }
+
+    onLogoutHandler = () => {
+
+        console.log("logout")
+
+        this.props.history.push({
+            pathname: "/",
+            state: {
+                defaultAccessToken: this.state.defaultAccessToken
+
+            }
+        })
+    }
+
     showImageDetailModel=(stateModel)=>
     {
         if(stateModel==true)
         return(
-           /* <ReactModal
-                isOpen={stateModel}
-                contentLabel="Minimal Modal Example"
-                className="imageDetailModel">
-                <div className="image-detai-bg">
-                    <img className="image-detail" src={this.state.selectedPost.images.standard_resolution.url}/>
-                    <div className="modal-header">
-                        <div className="avatar">
-                            <Avatar alt="P"
-                                    src={this.state.selectedPost.user.profile_picture}/>
-                        </div>
-                        <span className="modal-username">{this.state.selectedPost.user.username}</span>
 
-                    </div>
-
-                </div>
-            </ReactModal>*/
             <ReactModal
                 isOpen={stateModel}
                 contentLabel="Minimal Modal Example"
-                className="imageDetailModel">
+                className="imageDetailModel"
+                onRequestClose={this.closeImageDetailModal}
+
+            >
                 <div className="row">
                     <img className="image-detail" src={this.state.selectedPost.images.standard_resolution.url}/>
                     <div className="column">
@@ -279,13 +304,13 @@ class Profile extends Component {
                     </div>
                     <hr className="model-content-data"></hr>
                     <div className="model-content-data"> {this.state.selectedPost.caption.text}</div>
-                    <div className="model-content-data"> {this.renderHashtags(this.state.selectedPost.tags)}</div>
+                    <div className="model-content-data-hashtags"> {this.renderHashtags(this.state.selectedPost.tags)}</div>
 
-                    <div className="model-content-like">
 
+                    <div className="comment-section">
+                    {this.returnDiv(this.state.selectedPost.user.username,this.state.selectedPost.commentsectionpost)}
                     </div>
-
-                    <div className="alignbottom">
+                    <div className="align-bottom">
 
 
                         <IconButton aria-label="add to favorites"
@@ -300,7 +325,8 @@ class Profile extends Component {
 
                         <div className="add-comment-input-parent">
 
-                        <TextField className="add-comment-input" id="standard-basic" label="Add a comment"
+                        <TextField className="add-comment-input" id="standard-basic" label="Add a comment" value={this.state.addCommentField}
+
                                    onChange={this.commentOnChangeHandler}/>
 
                         <Button variant="contained" color="primary" style={{marginTop: 10, marginLeft: 10}}
@@ -355,6 +381,8 @@ class Profile extends Component {
                           </Fab>
                              <ReactModal
                                  isOpen={this.state.showModal}
+                                 onRequestClose={this.closeImageDetailModal}
+                                 shouldCloseOnOverlayClick="true"
                                  contentLabel="Minimal Modal Example"
                                  className="Modal">
                                  <div className="edit-modal">Edit</div>

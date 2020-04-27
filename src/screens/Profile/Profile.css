@@ -150,6 +150,16 @@
     display: flex;
     margin-top: 10px;
 }
+.model-content-data-hashtags{
+    margin-left: 10px;
+    float: left;
+    width: 50%;
+    display: flex;
+    margin-top: 10px;
+    color: lightskyblue;
+
+
+}
 .model-content-like{
     margin-left: 10px;
     float: left;
@@ -158,18 +168,7 @@
     margin-top: 10px;
     align-items: center;
 }
-.add-comment{
-
-    margin-left: 10px;
-    float: right;
-    width: 45%;
-    margin-top: 10px;
-    align-items: center;
-    display: flex;
-
-
-}
-.alignbottom{
+.align-bottom{
     position: absolute;
     bottom: 0;
     width: 45%;
@@ -184,5 +183,23 @@
 }
 .add-comment-input-parent {
     margin-left:10px;
+}
+.comment-username{
+
+    font-weight: bolder;
+    list-style-type: none;
+    margin-bottom:5px;
+}
+.comment-content{
+    font-weight: normal;
+
+    font-family: "Roboto";
+
+}
+.comment-section{
+    float: left;
+    width: 50%;
+    display: flex;
+    margin-left: -28px;
 }
 

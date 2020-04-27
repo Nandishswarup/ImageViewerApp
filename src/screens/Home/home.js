@@ -66,6 +66,7 @@ class Home extends Component {
             commentsection: [{}],
             isUserLoggedIn: "true",
             defaultAccessToken:"",
+            reset:"",
 
         }
     }
@@ -145,7 +146,15 @@ class Home extends Component {
     }
 
     onLogoutHandler = () => {
-        console.log("onLogoutHandler")
+        console.log("logout")
+
+        this.props.history.push({
+            pathname: "/",
+            state: {
+                defaultAccessToken: this.state.defaultAccessToken
+
+            }
+        })
     }
 
     avatarClick = () => {
@@ -178,13 +187,13 @@ class Home extends Component {
         return str;
     }
 
-    returnDiv(comment) {
+    returnDiv(username,comment) {
         if (comment != undefined)
             return (
 
                 <ul>
                     {comment.map((item, index) => (
-                        <li>{item}</li>
+                        <li className="comment-username">{username}<span className="comment-content"> : {item}</span></li>
                     ))}
 
                 </ul>
@@ -202,23 +211,27 @@ class Home extends Component {
 
     addCommentHandler = (post, comment) => {
 
-        console.log(comment);
-
         var keys = Object.keys(this.state.posts);
 
         for (var i = 0; i < this.state.posts.length; i++) {
             var key = (keys[i]);
             if (post.id == this.state.posts[key].id) {
-                this.state.commentsection.push(this.state.posts[key].commentsectionpost)
-                this.state.posts[key].commentsectionpost.push(comment);
-                //this.state.posts[key].commentsectionpost = this.state.commentsection;
-                console.log(this.state.posts[key].commentsectionpost)
-                this.setState({commentsection: []})
+                if(this.state.posts[key].commentsectionpost==undefined)
+                {
+                    this.state.posts[key].commentsectionpost=[]
+                    this.state.posts[key].commentsectionpost.push(comment)
+                }
+                else
+                    this.state.posts[key].commentsectionpost.push(comment)
+
+
 
             }
 
 
         }
+        this.state.addCommentField=""
+
         this.setState({posts: this.state.posts})
         console.log(this.state.posts)
 
@@ -255,6 +268,13 @@ class Home extends Component {
         }
 
     }
+    handleSubmit=(event)=>
+    {
+        event.target.value="";
+        event.preventDefault();
+        event.target.reset();
+
+    }
 
     render() {
         const {classes} = this.props;
@@ -271,7 +291,7 @@ class Home extends Component {
                     <Grid
                         container spacing={2}
                         direction="row"
-                        justify="center"
+                        justify="flex-start"
                         alignItems="flex-start">
 
 
@@ -314,21 +334,23 @@ class Home extends Component {
                                     </IconButton>
                                     {post.likes.count} likes
                                 </CardActions>
-                                {this.returnDiv(post.commentsectionpost)}
+                                {this.returnDiv(post.user.username,post.commentsectionpost)}
 
                                 {this.updateProfilePicture(post)
                                 }
-                                {/*  <ul>
-                                   <li>{post.commentsectionpost}</li>
-                                </ul>*/}
-                                <div className="add-comment">
-                                    <TextField className="add-comment-input" id="standard-basic" label="Add a comment"
-                                               onChange={this.commentOnChangeHandler}/>
 
-                                    <Button variant="contained" color="primary" style={{marginTop: 10, marginLeft: 10}}
-                                            onClick={this.addCommentHandler.bind(this, post, this.state.addCommentField)}>
-                                        ADD
-                                    </Button>
+                                <div className="add-comment">
+                                    <form action={this.handleSubmit.bind(this)}>
+                                    <TextField  className="add-comment-input" id="standard-basic" label="Add a comment"
+                                               onChange={this.commentOnChangeHandler}/>
+                                        <Button variant="contained" color="primary" style={{marginTop: 10, marginLeft: 10}}
+                                                onClick={this.addCommentHandler.bind(this, post, this.state.addCommentField)}>
+                                            ADD
+                                        </Button>
+                                    </form>
+
+
+
                                 </div>
 
 
