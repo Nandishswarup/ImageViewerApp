@@ -31,7 +31,7 @@ class Header extends Component {
     }
 
 
-    returnDiv(value,profileImage) {
+    returnDiv(value, profileImage) {
         if (value === "true")
             return (
 
@@ -51,7 +51,7 @@ class Header extends Component {
                                     <Avatar alt="P"
                                             src={profileImage}/>
                                 </div>
-                                <Menu {...bindMenu(popupState)} style={{marginTop:45}}>
+                                <Menu {...bindMenu(popupState)} style={{marginTop: 45}}>
                                     <MenuItem onClick={this.props.onMyProfileClickHandler}>My Profile</MenuItem>
                                     <MenuItem onClick={this.props.onLogoutClickHandler}>Logout</MenuItem>
                                 </Menu>
@@ -71,7 +71,8 @@ class Header extends Component {
                             <React.Fragment>
                                 <div className="avatar"  {...bindTrigger(popupState)}>
                                     <Avatar alt="P"
-                                            src={profileImage}/>
+                                            src={profileImage}
+                                            style={{backgroundColor: "red", borderColor: "red", borderWidth: 2}}/>
                                 </div>
                                 <Menu {...bindMenu(popupState)}>
                                     <MenuItem onClick={this.props.onLogoutClickHandler}>Logout</MenuItem>
@@ -97,7 +98,7 @@ class Header extends Component {
                      <span className="app-title">
                          Image Viewer
                      </span>
-                    {this.returnDiv(this.props.isUserLoggedIn,this.props.profilePicture)}
+                    {this.returnDiv(this.props.isUserLoggedIn, this.props.profilePicture)}
 
                 </header>
             </div>

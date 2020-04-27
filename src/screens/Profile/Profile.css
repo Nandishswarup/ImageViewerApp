@@ -17,6 +17,22 @@
     margin-bottom: 10px;
 
 }
+.modal-header{
+    display: flex;
+    margin-left: 20px;
+}
+
+.avatar {
+
+    display: inline-block;
+    align-items: end;
+    margin-right: 10px;
+    margin-left: 20px;
+
+}
+.modal-username{
+    font-size: 16px;
+}
 .top-container{
 
 
@@ -72,3 +88,101 @@
     height: 360px;
     margin: 2px;
 }
+.image-detail{
+    height: 400px;
+    float: left;
+    width: 48%;
+    margin-right: 2px;
+}
+.imageDetailModel{
+    position: fixed;
+    left: 20%;
+    transform: translate(0%, 10%) !important;
+    width: 800px;
+    height: 400px;
+    padding: 20px;
+    background: #fffdfd;
+
+}
+.image-detail-bg{
+    display: flex;
+}
+.Modal {
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%) !important;
+    width: 200px;
+    height: 200px;
+    background-color: white;
+    padding: 20px;
+    background: #fffdfd;
+
+}
+
+.update_name-input {
+    width: 80%;
+    margin-bottom: 20px;
+}
+.edit-modal{
+    font-size: 20px;
+    margin-bottom: 50px;
+
+}
+.update_button{
+    margin-top: 30px;
+}
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.column {
+    float: left;
+    width: 50%;
+    display: flex;
+
+}
+.model-content-data{
+    margin-left: 10px;
+    float: left;
+    width: 50%;
+    display: flex;
+    margin-top: 10px;
+}
+.model-content-like{
+    margin-left: 10px;
+    float: left;
+    width: 50%;
+    display: flex;
+    margin-top: 10px;
+    align-items: center;
+}
+.add-comment{
+
+    margin-left: 10px;
+    float: right;
+    width: 45%;
+    margin-top: 10px;
+    align-items: center;
+    display: flex;
+
+
+}
+.alignbottom{
+    position: absolute;
+    bottom: 0;
+    width: 45%;
+
+    left: 48%;
+    padding-bottom: 20px;
+}
+
+.add-comment-input {
+    width: 75%;
+    margin-left:10px;
+}
+.add-comment-input-parent {
+    margin-left:10px;
+}
+
