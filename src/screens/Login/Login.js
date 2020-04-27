@@ -7,7 +7,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import { Button } from '@material-ui/core';
 import { FormHelperText } from '@material-ui/core';
-import {BrowserRouter as Router,Route} from 'react-router-dom'
 
 class Login extends Component {
         constructor(props) {
@@ -70,20 +69,20 @@ class Login extends Component {
     loginHandler= (event) => {
         this.state.username === "" ? this.setState({ usernameRequired: "dispBlock" }) : this.setState({ usernameRequired: "dispNone" });
         this.state.password === "" ? this.setState({ passwordRequired: "dispBlock" }) : this.setState({ passwordRequired: "dispNone" });
-        /* console.log("username"+this.state.username)
-         console.log("password"+this.state.password)*/
+
         if(this.state.username=="nandish" && this.state.password=="241192")
         {
+            sessionStorage.setItem('access-token',this.state.defaultAccessToken);
 
+            this.props.history.push({
+                pathname:"/home",
+                state:{
+                    defaultAccessToken:this.state.defaultAccessToken
 
+                }
+            })
         }
-        this.props.history.push({
-            pathname:"/home",
-            state:{
-                defaultAccessToken:this.state.defaultAccessToken
 
-            }
-        })
 
 
     }

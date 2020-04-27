@@ -9,14 +9,10 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import "./Profile.css"
 import Fab from '@material-ui/core/Fab';
 import EditIcon from '@material-ui/icons/Edit';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import {Card, colors} from '@material-ui/core';
-import {CardHeader} from '@material-ui/core';
+
 import {Grid} from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import ReactModal from 'react-modal';
-import {bindTrigger} from "material-ui-popup-state";
 
 const styles = theme => ({
     root: {
@@ -110,7 +106,7 @@ class Profile extends Component {
 
             }
         })
-        let url = this.props.baseUrl + "media/recent?access_token=" + this.props.location.state.defaultAccessToken
+        let url = this.props.baseUrl + "media/recent?access_token=" + sessionStorage.getItem("access-token")
         console.log("url" + url);
         xhr.open("GET", url);
         xhr.send(list);
@@ -126,7 +122,7 @@ class Profile extends Component {
 
             }
         })
-        let urlprofile = this.props.baseUrl + "?access_token=" + this.props.location.state.defaultAccessToken
+        let urlprofile = this.props.baseUrl + "?access_token=" + sessionStorage.getItem("access-token")
         console.log("urlprofile" + urlprofile);
         xhrprofile.open("GET", urlprofile);
         xhrprofile.send(profile);
@@ -136,8 +132,7 @@ class Profile extends Component {
             this.props.history.push({
                 pathname: "/",
                 state: {
-                    accessToken: this.state.accessToken,
-                    defaultAccessToken: this.state.defaultAccessToken
+                     defaultAccessToken: this.state.defaultAccessToken
 
                 }
             })
@@ -268,7 +263,7 @@ class Profile extends Component {
     onLogoutHandler = () => {
 
         console.log("logout")
-
+sessionStorage.clear()
         this.props.history.push({
             pathname: "/",
             state: {
@@ -421,20 +416,7 @@ class Profile extends Component {
                                      alt="img"
                                      onClick={this.openImageDetailModal.bind(this, post)}>
                                 </img>
-                                  {/*  <ReactModal
-                                        isOpen={this.state.imageDetailModal}
-                                        contentLabel="Minimal Modal Example"
-                                        className="imageDetailModel">
-                                <div className="image-detai-bg">
-                                 <img className="image-detail" src={post.images.standard_resolution.url}/>
-                                <div>
-                                <img src={post.user.profile_picture}>
-                                </img>
-                                    {post.user.username}
-                                </div>
-                                 </div>
 
-                             </ReactModal>*/}
 
                                 </span>
                             ))}

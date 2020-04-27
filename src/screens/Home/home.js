@@ -110,7 +110,8 @@ class Home extends Component {
     }
 
     componentWillMount() {
-        this.state.defaultAccessToken=this.props.location.state.defaultAccessToken
+      //  console.log(localStorage.getItem("session"))
+        this.state.defaultAccessToken=sessionStorage.getItem("access-token")
         this.setState({isUserLoggedIn: "true"})
         let list = null;
         let xhr = new XMLHttpRequest();
@@ -146,6 +147,7 @@ class Home extends Component {
     }
 
     onLogoutHandler = () => {
+        sessionStorage.clear()
         console.log("logout")
 
         this.props.history.push({

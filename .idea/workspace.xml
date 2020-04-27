@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="dc444679-185b-4ec5-8d4b-4a5bf3e6dd1a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/Home/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Home/home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/header/header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/header/header.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/Home/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Home/home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/Login/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Login/Login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/Profile/Profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Profile/Profile.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/Profile/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Profile/Profile.js" afterDir="false" />
     </list>
@@ -82,7 +83,7 @@
       <updated>1587258947755</updated>
       <workItem from="1587258949941" duration="16859000" />
       <workItem from="1587681278941" duration="8804000" />
-      <workItem from="1587711284863" duration="78749000" />
+      <workItem from="1587711284863" duration="79535000" />
     </task>
     <servers />
   </component>
@@ -178,17 +179,17 @@
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="305" y="185" key="run.anything.popup/0.0.1280.800@0.0.1280.800" timestamp="1587342021932" />
-    <state x="626" y="124" width="670" height="676" key="search.everywhere.popup" timestamp="1587945702124">
+    <state x="626" y="124" width="670" height="676" key="search.everywhere.popup" timestamp="1588010751890">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state x="626" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1587945702124" />
+    <state x="626" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1588010751890" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/screens/Home/home.js</url>
-          <line>114</line>
+          <line>115</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>

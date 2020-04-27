@@ -3,11 +3,9 @@ import './header.css';
 import SearchIcon from '@material-ui/icons/Search';
 import {Avatar} from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
-import {makeStyles} from "@material-ui/core/styles";
-import Menu from '@material-ui/core/Menu';
+ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import PopupState, {bindTrigger, bindMenu} from 'material-ui-popup-state';
-import Button from '@material-ui/core/Button';
 
 
 class Header extends Component {
@@ -88,8 +86,7 @@ class Header extends Component {
 
     render() {
 
-        /*className={this.state.isUserLoggedIn}*/
-        return (
+         return (
 
             <div>
 
